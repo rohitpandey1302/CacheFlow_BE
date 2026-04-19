@@ -1,0 +1,22 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: sync-service
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP:localhost:9092}
+    consumer:
+      group-id: sync-service-group
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+
+services:
+  post-service:
+    url: ${POST_SERVICE_URL:http://localhost:8081}
+
+sync:
+  schedule:
+    initial-delay-ms: 60000
+    fixed-delay-ms: 1800000

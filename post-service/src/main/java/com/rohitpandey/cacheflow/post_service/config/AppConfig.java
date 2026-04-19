@@ -1,4 +1,4 @@
-package com.rohitpandey.cacheflow.post_service.app_config;
+package com.rohitpandey.cacheflow.post_service.config;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;

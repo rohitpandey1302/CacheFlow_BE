@@ -1,0 +1,36 @@
+version: '3.9'
+
+networks:
+  cacheflow-network:
+    driver: bridge
+
+services:
+  post-service:
+    build:
+      context: ./post-service
+      dockerfile: Dockerfile
+    container_name: cacheflow-post-service
+    environment:
+      KAFKA_BOOTSTRAP: kafka:9092
+      SPRING_PROFILES_ACTIVE: docker
+
+    ports:
+      - "8081:8081"
+    networks:
+      - cacheflow-network
+    restart: on-failure
+
+  sync-service:
+    build:
+      context: ./sync-service
+      dockerfile: Dockerfile
+    container_name: cacheflow-sync-service
+    environment:
+      KAFKA_BOOTSTRAP: kafka:9092
+      POST_SERVICE_URL: http://post-service:8081
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "8082:8082"
+    networks:
+      - cacheflow-network
+    restart: on-failure
