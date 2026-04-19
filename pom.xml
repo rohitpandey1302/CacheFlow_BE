@@ -14,7 +14,8 @@
 
 	<modules>
 		<module>post-service</module>
-	</modules>
+        <module>sync-service</module>
+    </modules>
 
 	<properties>
 		<java.version>21</java.version>
